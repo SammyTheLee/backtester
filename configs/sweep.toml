@@ -1,0 +1,34 @@
+# Parameter sweep — always backtests on the train window only.
+# Usage:  python -m bt sweep --config configs/sweep.toml
+
+[data]
+csv_path = "data/candles/DEMO.csv"
+
+[split]
+train_start = "2026-01-01"
+train_end = "2026-01-05"
+validation_start = "2026-01-06"
+validation_end = "2026-01-09"
+oos_start = "2026-01-10"
+oos_end = "2026-01-13"
+
+[strategy]
+type = "ma_crossover"
+fast_ma = [5, 10, 20]
+slow_ma = [30, 50, 100]
+
+[execution]
+stop_pct = [0.01, 0.02]
+take_profit_pct = [0.02, 0.04]
+fee_bps = 10
+slippage_bps = 5
+
+[portfolio]
+initial_equity = 10000.0
+size = 1.0
+
+[output]
+# runs.csv = every backtest; summary.csv = top N configs (deduped by parameters).
+summary_sort_by = "composite_score"
+drawdown_penalty = 1.0
+summary_top_n = 10

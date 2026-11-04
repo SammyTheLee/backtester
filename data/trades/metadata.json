@@ -1,0 +1,87 @@
+{
+  "run_at": "2026-05-28T11:34:15.171125+00:00",
+  "config_path": "configs/example.toml",
+  "config": {
+    "data": {
+      "csv_path": "data/candles/DEMO.csv"
+    },
+    "strategy": {
+      "type": "ma_crossover",
+      "fast": 5,
+      "slow": 20
+    },
+    "execution": {
+      "stop_pct": 0.02,
+      "target_pct": 0.04,
+      "fee_bps": 10,
+      "slippage_bps": 5
+    },
+    "portfolio": {
+      "initial_equity": 10000.0,
+      "size": 1.0
+    },
+    "output": {
+      "trades_path": "data/trades/trades.csv",
+      "equity_path": "data/trades/run_equity.csv",
+      "runs_path": "data/runs.csv",
+      "summary_path": "data/trades/summary.csv",
+      "summary_sort_by": "net_pnl",
+      "metadata_path": "data/trades/metadata.json",
+      "report_path": "data/trades/run_report.json"
+    }
+  },
+  "resolved": {
+    "data_csv": "data/candles/DEMO.csv",
+    "strategy": "ma_crossover(fast=5, slow=20)",
+    "fast": 5,
+    "slow": 20,
+    "stop_pct": 0.02,
+    "target_pct": 0.04,
+    "initial_equity": 10000.0,
+    "size": 1.0,
+    "summary_sort_by": "net_pnl"
+  },
+  "assumptions": {
+    "timing": [
+      "Signal is known at the close of bar N.",
+      "Entries and opposing-signal exits fill at the open of bar N+1.",
+      "Stops and targets are checked with each bar high/low from the entry bar.",
+      "If stop and target both trade inside one bar, stop is assumed first."
+    ],
+    "strategy": {
+      "type": "ma_crossover",
+      "long": "fast_ma crosses above slow_ma",
+      "short": "fast_ma crosses below slow_ma",
+      "signals": "Sparse events only at crossover bars (not every bar in a trend)."
+    },
+    "costs": {
+      "fee": "fee = notional * fee_bps / 10000 (charged on entry and exit)",
+      "slippage_rate": "slippage_bps / 10000",
+      "long_entry": "open * (1 + slippage_rate)",
+      "short_entry": "open * (1 - slippage_rate)",
+      "long_exit": "raw_exit * (1 - slippage_rate)",
+      "short_exit": "raw_exit * (1 + slippage_rate)",
+      "holding": "optional per-bar: close * size * holding_cost_bps / 10000"
+    },
+    "pnl": {
+      "gross_pnl": "Price PnL at raw entry_open and exit_raw",
+      "net_pnl": "gross_pnl - slippage_cost - entry_fee - exit_fee - holding_cost",
+      "equity_curve": "Entry fee at open; gross - slippage - exit fee - holding at close"
+    },
+    "ranking": {
+      "summary_csv": "All runs from runs.csv sorted by summary_sort_by (default net_pnl desc)"
+    },
+    "costs_applied": {
+      "fee_bps": 10.0,
+      "slippage_bps": 5.0,
+      "holding_cost_bps": 0.0,
+      "stop_pct": 0.02,
+      "target_pct": 0.04
+    }
+  },
+  "data": {
+    "rows": 300,
+    "time_start": "2026-01-01T00:00:00",
+    "time_end": "2026-01-13T11:00:00"
+  }
+}

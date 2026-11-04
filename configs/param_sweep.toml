@@ -1,0 +1,61 @@
+# Walk-forward parameter search (train → validation → OOS).
+#
+#   python -m bt walkforward --config configs/walkforward.toml
+#   python -m bt walkforward --config configs/param_sweep.toml   # same settings
+#
+# Or step by step:
+#   python -m bt sweep --config configs/param_sweep.toml      # full grid on train only
+#   python -m bt validate --config configs/param_sweep.toml   # top train configs only
+#   python -m bt oos --config configs/param_sweep.toml        # top validation configs only
+#
+# Sweep ignores data.split; all combinations use train_start .. train_end.
+
+[data]
+csv_path = "data/candles/DEMO.csv"
+
+[split]
+train_start = "2026-01-01"
+train_end = "2026-01-05"
+validation_start = "2026-01-06"
+validation_end = "2026-01-09"
+oos_start = "2026-01-10"
+oos_end = "2026-01-13"
+
+[strategy]
+type = "ma_crossover"
+
+[sweep]
+fast_ma = [5, 10, 20]
+slow_ma = [30, 50, 100]
+stop_pct = [0.01, 0.02]
+take_profit_pct = [0.02, 0.04]
+
+[execution]
+fee_bps = 10
+slippage_bps = 5
+
+[portfolio]
+initial_equity = 10000.0
+size = 1.0
+
+[output]
+# summary.csv = final leaderboard (OOS only, ranked by composite_score)
+# walkforward_summary.csv = train + validation + OOS metrics (written after `bt oos`)
+summary_sort_by = "composite_score"
+drawdown_penalty = 1.0
+summary_top_n = 10
+
+[walkforward]
+# Optional overrides (defaults fall back to validation.top_n / oos.top_n).
+train_top_n = 10
+validation_top_n = 10
+
+[validation]
+top_n = 10
+# source = "results/summary.csv"
+# sweep_dir = "results/sweep_YYYYMMDD_HHMMSS"
+
+[oos]
+top_n = 10
+# source = "results/validation_YYYYMMDD_HHMMSS/validation_results.csv"
+# validation_dir = "results/validation_YYYYMMDD_HHMMSS"

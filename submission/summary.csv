@@ -1,0 +1,2 @@
+run_at,config,data_path,data_split,strategy,fast,slow,gross_pnl,net_pnl,total_return_pct,composite_score,trade_count,win_rate,profit_factor,max_drawdown,average_hold_hours,time_in_market_pct
+2026-08-05T09:02:48.474448+00:00,configs/example.toml,data/candles/DEMO.csv,train,"ma_crossover(fast=5, slow=20)",5,20,0.4952993999999933,-0.6643213270502606,-7.566751270514942e-05,-0.0003899974834963359,4,0.25,0.8467294142705538,3.143299707911865,12.75,0.5567010309278351

@@ -1,0 +1,40 @@
+# Example backtester run config.
+# Usage:  python3 -m bt run --config configs/example.toml
+#
+# Each run writes CSV + JSON under results/YYYYMMDD_HHMMSS/ (UTC).
+# Cross-run history: results/runs.csv and results/summary.csv
+
+[data]
+csv_path = "data/candles/DEMO.csv"
+split = "train"   # train | test | oos | all (requires [split] dates below)
+
+[split]
+train_start = "2026-01-01"
+train_end = "2026-01-05"
+test_start = "2026-01-06"
+test_end = "2026-01-09"
+oos_start = "2026-01-10"
+oos_end = "2026-01-13"
+
+[strategy]
+type = "ma_crossover"
+fast = 5
+slow = 20
+
+[execution]
+stop_pct = 0.02
+target_pct = 0.04
+fee_bps = 10
+slippage_bps = 5
+# holding_cost_bps = 1
+
+[portfolio]
+initial_equity = 10000.0
+size = 1.0
+
+[output]
+summary_sort_by = "composite_score"
+drawdown_penalty = 1.0
+summary_top_n = 10
+# runs_log = "results/runs.csv"
+# ranked_summary = "results/summary.csv"

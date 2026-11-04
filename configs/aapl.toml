@@ -1,0 +1,24 @@
+# Backtest on real Apple stock data (daily candles).
+#   python fetch_data.py AAPL --period 1y --interval 1d
+#   python -m bt run --config configs/aapl.toml
+
+[data]
+csv_path = "data/candles/AAPL.csv"
+
+[strategy]
+type = "ma_crossover"
+fast = 5
+slow = 20
+
+[execution]
+stop_pct = 0.02
+target_pct = 0.04
+fee_bps = 10
+slippage_bps = 5
+
+[portfolio]
+initial_equity = 10000.0
+size = 1.0
+
+[output]
+summary_sort_by = "net_pnl"

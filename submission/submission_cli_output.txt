@@ -1,0 +1,92 @@
+=== PYTEST ===
+........................................................................ [ 45%]
+........................................................................ [ 90%]
+................                                                         [100%]
+160 passed in 2.94s
+
+=== DEMO CLI ===
+Wrote 300 rows to data/candles/DEMO.csv
+
+First 5 rows:
+Config         : configs/example.toml
+Data           : data/candles/DEMO.csv
+Data split       : train
+Train window     : 2026-01-01 .. 2026-01-05
+Test window      : 2026-01-06 .. 2026-01-09
+Strategy       : ma_crossover(fast=5, slow=20)
+Stop pct       : 0.0200
+Target pct     : 0.0400
+Fee bps        : 10
+Slippage bps   : 5
+Position size  : 1.0
+
+=== Strategy Report Card ===
+Gross PnL          : $0.50
+Net PnL            : $-0.66
+Total return       : -0.01%
+Trade count        : 4
+Win rate           : 25.0%
+Profit factor      : 0.85
+Max drawdown       : $3.14
+Avg hold time      : 12.8 hours
+Time in market     : 55.7%
+
+Run output folder: results/20260805_090248
+Saved 5 trade(s) to results/20260805_090248/trades.csv
+Saved equity curve to results/20260805_090248/equity.csv
+Saved metadata to results/20260805_090248/metadata.json
+Runs log      : results/runs.csv (127 rows, all backtests)
+Final leaderboard: results/summary.csv (0 OOS configs, ranked by composite_score)
+
+val_rank=2 fast=20_slow=100_stop_pct=0.02_target_pct=0.02 -> oos net_pnl=$0.00 (validation was $0.00)
+val_rank=3 fast=20_slow=100_stop_pct=0.01_target_pct=0.04 -> oos net_pnl=$0.00 (validation was $0.00)
+val_rank=4 fast=20_slow=100_stop_pct=0.01_target_pct=0.02 -> oos net_pnl=$0.00 (validation was $0.00)
+val_rank=5 fast=10_slow=100_stop_pct=0.02_target_pct=0.04 -> oos net_pnl=$0.00 (validation was $0.00)
+val_rank=6 fast=10_slow=100_stop_pct=0.02_target_pct=0.02 -> oos net_pnl=$0.00 (validation was $0.00)
+val_rank=7 fast=10_slow=100_stop_pct=0.01_target_pct=0.04 -> oos net_pnl=$0.00 (validation was $0.00)
+val_rank=8 fast=10_slow=50_stop_pct=0.01_target_pct=0.04 -> oos net_pnl=$0.00 (validation was $-1.23)
+val_rank=9 fast=5_slow=30_stop_pct=0.01_target_pct=0.02 -> oos net_pnl=$0.47 (validation was $-1.23)
+val_rank=10 fast=10_slow=30_stop_pct=0.01_target_pct=0.02 -> oos net_pnl=$0.47 (validation was $-1.24)
+
+Walk-forward folder : results/walkforward_20260805_090248
+  Sweep (36 combos) : results/walkforward_20260805_090248/sweep_20260805_090248
+  Validation (10 configs) : results/walkforward_20260805_090248/validation_20260805_090249
+  OOS (10 configs) : results/walkforward_20260805_090248/oos_20260805_090249
+  Summary (train+val+oos) : results/walkforward_20260805_090248/walkforward_summary.csv
+Runs log      : results/runs.csv (127 rows, all backtests)
+Final leaderboard: results/summary.csv (0 OOS configs, ranked by composite_score)
+
+Top walk-forward configs (by oos_composite_score):
+ oos_rank  train_rank  val_rank  fast  slow  train_composite_score  val_composite_score  oos_composite_score
+        1           4         1     5   100                    0.0                  0.0                  0.0
+        2           5         2    20   100                    0.0                  0.0                  0.0
+        3           6         3    20   100                    0.0                  0.0                  0.0
+        4           7         4    20   100                    0.0                  0.0                  0.0
+        5           8         5    10   100                    0.0                  0.0                  0.0
+
+Run folder : results/20260805_090248
+Kind       : backtest
+Metadata   : results/20260805_090248/metadata.json
+  config_path: configs/example.toml
+  strategy  : ma_crossover(fast=5, slow=20) (split=train)
+  data      : data/candles/DEMO.csv
+
+=== Strategy Report Card ===
+Gross PnL          : $0.50
+Net PnL            : $-0.66
+Total return       : -0.01%
+Trade count        : 4
+Win rate           : 25.0%
+Profit factor      : 0.85
+Max drawdown       : $3.14
+Avg hold time      : 12.8 hours
+Time in market     : 55.7%
+
+Plain-language report: results/20260805_090248/report.md
+
+=== Artifacts ===
+  equity.csv
+  metadata.json
+  report.json
+  report.md
+Wrote plain-language report → results/20260805_090248/report.md

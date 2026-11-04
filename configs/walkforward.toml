@@ -1,0 +1,48 @@
+# Final demo: walk-forward (train → validation → OOS).
+#
+#   python -m bt walkforward --config configs/walkforward.toml
+#
+# Same grid and splits as param_sweep.toml (alias for the demo script).
+
+[data]
+csv_path = "data/candles/DEMO.csv"
+
+[split]
+train_start = "2026-01-01"
+train_end = "2026-01-05"
+validation_start = "2026-01-06"
+validation_end = "2026-01-09"
+oos_start = "2026-01-10"
+oos_end = "2026-01-13"
+
+[strategy]
+type = "ma_crossover"
+
+[sweep]
+fast_ma = [5, 10, 20]
+slow_ma = [30, 50, 100]
+stop_pct = [0.01, 0.02]
+take_profit_pct = [0.02, 0.04]
+
+[execution]
+fee_bps = 10
+slippage_bps = 5
+
+[portfolio]
+initial_equity = 10000.0
+size = 1.0
+
+[output]
+summary_sort_by = "composite_score"
+drawdown_penalty = 1.0
+summary_top_n = 10
+
+[walkforward]
+train_top_n = 10
+validation_top_n = 10
+
+[validation]
+top_n = 10
+
+[oos]
+top_n = 10

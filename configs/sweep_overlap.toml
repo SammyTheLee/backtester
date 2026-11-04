@@ -1,0 +1,24 @@
+# Example where some grid pairs are invalid (fast_ma >= slow_ma) and get skipped.
+# Usage:  python -m bt combinations --config configs/sweep_overlap.toml
+
+[data]
+csv_path = "data/candles/DEMO.csv"
+
+[split]
+train_start = "2026-01-01"
+train_end = "2026-01-13"
+
+[strategy]
+type = "ma_crossover"
+fast_ma = [5, 30]
+slow_ma = [10, 50]
+
+[execution]
+stop_pct = 0.02
+take_profit_pct = 0.04
+
+[portfolio]
+initial_equity = 10000.0
+
+[output]
+summary_sort_by = "net_pnl"

@@ -1,0 +1,4 @@
+timestamp,asset,regime
+2026-04-15T00:00:00Z,BTC,risk_on
+2026-05-01T00:00:00Z,BTC,risk_off
+2026-05-15T00:00:00Z,AAPL,risk_on
